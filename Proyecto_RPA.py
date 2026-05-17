@@ -15,7 +15,7 @@ import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # ==========================================================================
-# 1. PEDIR UBICACIÓN AL USUARIO
+#  PEDIR UBICACIÓN AL USUARIO
 # ==========================================================================
 
 UBICACIONES = {
@@ -43,7 +43,7 @@ if opcion not in UBICACIONES:
 ubicacion = UBICACIONES[opcion]
 
 # ==========================================================================
-# 2. DESCARGAR LA PÁGINA WEB
+#  DESCARGAR LA PÁGINA WEB
 # ==========================================================================
 # Construimos la URL completa 
 url = 'https://tablademareas.com/es/islas-canarias/' + ubicacion
@@ -137,7 +137,7 @@ for p in soup.find_all('p', class_='txt_descripcion'):
     if m: puesta_sol = m.group(1)
 
 # ==========================================================================
-# 6. MOSTRAR RESULTADOS EN TERMINAL
+# MOSTRAR RESULTADOS EN TERMINAL
 # ==========================================================================
 from datetime import datetime
 
@@ -162,7 +162,7 @@ print(f"  Puesta sol:     {puesta_sol} h")
 print("\n" + "=" * 55)
 
 # ==========================================================================
-# 7. ABRIR WINDY.APP EN EL NAVEGADOR CON SELENIUM
+# ABRIR WINDY.APP EN EL NAVEGADOR CON SELENIUM
 # ==========================================================================
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys 
