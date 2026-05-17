@@ -70,15 +70,15 @@ soup = BeautifulSoup(respuesta.text, 'html.parser')
 # EXTRAER DATOS DE MAREAS 
 # ==========================================================================
 
+# Extraer PLeamares y Bajamares
 # Buscamos las mareas, que están dentro de elementos <div> con la clase CSS 'fondo_grafico_pleamares_bajamares'. (índice 2) contiene el día actual.
 
-# Buscamos TODOS los divs con esa clase CSS
+# Buscamos todos los divs con esa clase CSS
 divs_grafico = soup.find_all('div', class_='fondo_grafico_pleamares_bajamares')
 
 # Lista guardar datos de mareas
 mareas = []
 
-# Verificamos que existan al menos 3 divs 
 if len(divs_grafico) >= 3:
     # Obtenemos el texto del tercer div
     texto_alturas = divs_grafico[2].get_text(strip=True)
@@ -96,7 +96,7 @@ if len(divs_grafico) >= 3:
         mareas.append({'tipo': tipo, 'hora': hora, 'altura': alt})
 
 
-# EXTRAER COEFICIENTES DE MAREAS
+# Extraemos ahora los coeficientes de marea
 # Estos datos están dentro de código JavaScript
 # Inicializamos los valores con '-'
 coef_inicio = coef_medio = coef_fin = '-'
@@ -118,7 +118,7 @@ for script in soup.find_all('script'):
         if m: coef_fin = m.group(1)
 
 
-# EXTRAER AMANECER Y PUESTA DE SOL
+# Extraer la hora del amanecer y puesta de sol
 # La hora del amanecer y puesta de sol están en un párrafo descriptivo del HTML con la clase 'txt_descripcion'
 
  # Inicializamos los valores con '-'
@@ -144,7 +144,7 @@ from datetime import datetime
 # Eliminamos los guiones de la ubicacion y lo convertimos a mayusculas
 nombre = ubicacion.replace('-', ' ').upper()
 
-# Imprimimos el informe formateado con todos los datos extraídos
+# Imprimimos el informe
 print("\n" + "=" * 55)
 print(f"  INFORME DE PESCA - {nombre}")
 print(f"  {datetime.now().strftime('%d/%m/%Y %H:%M')}") #Fecha y hora actual usando libreria datetime
@@ -174,10 +174,10 @@ import time
 # Inicializar el controlador de Selenium para Chrome 
 driver = webdriver.Chrome() 
 
-#Navegar a la página de Windy app para ver infromacion de viento y precipitaciones de forma visual  
+# Navegar a la página de Windy app para ver infromacion de viento y precipitaciones de forma visual  
 driver.get("https://windy.app/")
 
-#Ahustamos ancho y alto de navegador par poder buscar por imagen en la captura de pantalla 
+# Ahustamos ancho y alto de navegador par poder buscar por imagen en la captura de pantalla 
 driver.set_window_size(1920, 1080)
 
 # Esperar unos segundos para que la página se cargue completamente 
